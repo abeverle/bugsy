@@ -2,7 +2,8 @@
 #include <RF24.h>
 #include <SPI.h>
 
-byte msg[4];// = {7,0,2,0};
+const int MESSAGE_SIZE = 5;
+byte msg[MESSAGE_SIZE];// = {7,0,2,34};
 RF24 radio(9, 10);
 
 int ackData[2] = {-1,-1};
@@ -24,10 +25,10 @@ void setup() {
 }
 
 void loop() {
-  while(Serial.available() < 3){
+  while(Serial.available() < MESSAGE_SIZE){
     delay(20);
   } 
-  Serial.readBytes(msg, 3);
+  Serial.readBytes(msg, MESSAGE_SIZE);
 
   bool result = radio.write(msg, sizeof(msg));
   if(result) {
