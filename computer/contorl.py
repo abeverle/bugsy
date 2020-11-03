@@ -1,7 +1,6 @@
 import serial
 import keyboard
 import time
-import paths as auto
 import numpy as np
 
 ard = serial.Serial("COM4", 9600)
@@ -14,10 +13,6 @@ while True:
     ctrl_d = 0
     maxRev = 55
     placeHolder = 0
-
-    # ctrl_v, ctrl_w, ctrl_d = auto.leftOval(sensorArr[0])
-    # ctrl_v, ctrl_w, ctrl_d, maxRev = auto.driveLengthOfDesks(sensorArr[0])
-    # print(sensorArr, (sensorArr[0]*10.286)/12)
 
     if keyboard.is_pressed('w'):  # if key 'w' is pressed 
         ctrl_v = 255

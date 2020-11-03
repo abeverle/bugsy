@@ -55,7 +55,6 @@ void setup(){
 
     lastMsgTime = 0;
     turn.invert();
-//    back.invert();
     pinMode(A5, OUTPUT);
 
     Serial.begin(9600);    
@@ -102,8 +101,7 @@ void move() {
         revolutions = 0;
 
     if(instructionAllowed(dir, ctrv)) {
-        if(revolutions < maxRotations) { // || maxRotations = -1) { // if maxRotations is -1 its a user command not auto
-        // if(revolutions >= 0) {
+        if(revolutions >= 0) {
             back.drive(ctrv, dir & 1);
         }
         else{
@@ -147,9 +145,6 @@ void updateRev() {
     }
 
     ackData[0] = revolutions;
-    // Serial.print(revolutions*CIRCUMFERENCE);
-    // Serial.print(", ");
-    // Serial.println(revolutions);
 }
 
 bool newMessage() {
