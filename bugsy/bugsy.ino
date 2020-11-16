@@ -3,6 +3,8 @@
 #include "SmartServo.h"
 #include "Eyes.h"
 #include "drive.h"
+#include "carSpecs.h"
+
 #include <math.h>
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -54,9 +56,19 @@ void setup(){
     initializeRadio();
 
     lastMsgTime = 0;
-    turn.invert();
-//    back.invert();
     pinMode(A5, OUTPUT);
+    
+    switch (CAR)
+    {
+    case 'J': //jack
+        turn.invert();
+        break;
+    case 'W': //wasp
+        back.invert();
+        break;                
+    default:
+        break;
+    }
 
     Serial.begin(9600);    
     Serial.println("Started robot");
@@ -137,12 +149,12 @@ bool instructionAllowed(byte dir, byte ctrv) {
 void updateRev() {
     odoSignal = analogRead(odoPin);
     
-    if (odoSignal > 500 && addRev){
+    if (odoSignal > UPPER_ODOM && addRev){
         revolutions++;
         totalRevolutions++;
         addRev = false;
     }
-    else if(odoSignal < 200){
+    else if(odoSignal < LOWER_ODOM){
         addRev = true;
     }
 
