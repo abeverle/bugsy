@@ -3,7 +3,6 @@
 //returns distance from object in front of robot in inches
 double Eyes::checkForObject() {
     double duration, inches, cm;
-    pinMode(pingPin, OUTPUT);
     digitalWrite(pingPin, LOW);
     delayMicroseconds(2);
     digitalWrite(pingPin, HIGH);
